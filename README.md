@@ -40,5 +40,5 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ## Backend API Docs
 
 1. `POST /api/text/generate`: Takes `{ prompt }` as body and generates `{ message }`.
-2. `POST /api/image/describe`: Takes blob image as body and generates `{ description }`.
+2. `POST /api/image/describe`: Takes `{ url }` as body and generates `{ description }`.
 3. `POST /api/image/generate`: Takes `{ description }` as body and generates `{ imageUrl }`.
