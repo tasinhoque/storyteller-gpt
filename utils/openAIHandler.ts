@@ -15,11 +15,23 @@ export const generateImage = async (prompt: string) => {
   return response.data[0].url ?? "";
 };
 
-export const generateText = async (prompt: string) => {
+export const generateText = async (
+  model: string,
+  content: string | OpenAI.Chat.Completions.ChatCompletionContentPart[]
+) => {
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "user", content: prompt }],
-    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content }],
+    model,
   });
 
   return completion.choices[0].message.content ?? "";
 };
+
+export const describeImage = async (url: string) =>
+  generateText("gpt-4-vision-preview", [
+    { type: "text", text: "What's in this image?" },
+    { type: "image_url", image_url: { url } },
+  ]);
+
+export const chat = async (prompt: string) =>
+  generateText("gpt-3.5-turbo", prompt);

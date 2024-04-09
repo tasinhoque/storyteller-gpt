@@ -39,7 +39,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Backend API Docs
 
-1. `POST /api/text/analyze`: Takes `{ scene }` as body and generates `{ story }`.
-2. `POST /api/text/generate`: Takes `{ story }` as body and generates `{ scene }`.
-3. `POST /api/image/analyze`: Takes blob image as body and generates `{ description }`.
-4. `POST /api/image/generate`: Takes `{ description }` as body and generates `{ imageUrl }`.
+1. `POST /api/text/generate`: Takes `{ prompt }` as body and generates `{ message }`.
+2. `POST /api/image/describe`: Takes blob image as body and generates `{ description }`.
+3. `POST /api/image/generate`: Takes `{ description }` as body and generates `{ imageUrl }`.

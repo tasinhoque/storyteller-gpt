@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { chat } from "@/utils/openAIHandler";
+import { describeImage } from "@/utils/openAIHandler";
 import { NextError } from "../../types";
 import { isRequestRejected, error } from "@/utils/safetyChecking";
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { prompt } = await req.json();
-    const message = await chat(prompt);
+    const { url } = await req.json();
+    const message = await describeImage(url);
 
     if (isRequestRejected(message)) {
       return NextResponse.json({ error }, { status: 400 });
