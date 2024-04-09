@@ -1,31 +1,26 @@
 "use client";
 
-import React, { createContext, useState } from "react";
-
-const defaultImageContextValue = {
-  url: "",
-  requestImg: () => Promise.resolve(),
-  clearImg: () => {},
-};
-
-export const ImageContext = createContext(defaultImageContextValue);
+import React, { useState } from "react";
+import { ImageContext } from "./context";
+import { useGetStoryScene } from "../message";
 
 export const ImageProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [url, setUrl] = useState("");
+  const scene = useGetStoryScene();
 
   const requestImg = async () => {
-    let prompt = "your fetch logic here";
-    let res = await fetch("/api/img", {
+    let res = await fetch("/api/image/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ scene }),
     });
+
     const data = await res.json();
-    setUrl(data.url); // Assuming the response contains the image URL in a url property
+    setUrl(data.url);
   };
 
   const clearImg = () => setUrl("");

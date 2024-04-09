@@ -1,24 +1,46 @@
 "use client";
 
 import { useContext } from "react";
-import { MessageContext } from "./MessageProvider";
+import { MessageContext } from "./context";
 
-export const useMessage = () => {
+export const useDescription = () => {
   const context = useContext(MessageContext);
 
-  if (context === undefined) {
-    throw new Error("useMessage must be used within a MessageProvider");
-  }
-
-  return context.message;
+  return context.description;
 };
 
-export const useSetMessage = () => {
+export const useSetDescription = () => {
   const context = useContext(MessageContext);
 
-  if (context === undefined) {
-    throw new Error("useSetMessage must be used within a MessageProvider");
-  }
+  return context.setDescription;
+};
 
-  return context.setMessage;
+export const useStory = () => {
+  const context = useContext(MessageContext);
+
+  return context.story;
+};
+
+export const useError = () => {
+  const context = useContext(MessageContext);
+
+  return context.error;
+};
+
+export const useDescribe = () => {
+  const context = useContext(MessageContext);
+
+  return context.describe;
+};
+
+export const useGenerateStory = () => {
+  const context = useContext(MessageContext);
+
+  return context.generateStory;
+};
+
+export const useGetStoryScene = () => {
+  const context = useContext(MessageContext);
+
+  return context.getStoryScene;
 };

@@ -1,2 +1,10 @@
 export { MessageProvider } from "./MessageProvider";
-export { useMessage, useSetMessage } from "./hooks";
+export {
+  useDescription,
+  useSetDescription,
+  useStory,
+  useError,
+  useDescribe,
+  useGenerateStory,
+  useGetStoryScene,
+} from "./hooks";

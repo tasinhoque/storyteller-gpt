@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest) => {
     }
   } catch (error) {
     return NextResponse.json(
-      { error: (error as OpenAiApiError).error.message },
+      { message: (error as OpenAiApiError).error.message },
       { status: 400 }
     );
   }
