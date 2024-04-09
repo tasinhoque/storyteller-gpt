@@ -15,7 +15,7 @@ import {
 
 const dummyText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sagittis bibendum nibh in placerat. In nec porta erat. Donec nec fermentum tellus. Mauris quis velit et tellus efficitur ultricies. Vestibulum tincidunt, ligula commodo eleifend cursus, enim orci volutpat enim, eget gravida quam urna nec velit. Donec tellus justo, ultrices ut mi eget, fringilla congue dolor. Curabitur massa est, porta vel risus ut, convallis efficitur augue. Phasellus ut lectus sed mi auctor tincidunt quis nec risus. Pellentesque nunc lectus, laoreet vel odio eu, elementum lacinia massa. Phasellus at dui ornare, dignissim orci ac, laoreet sem. Nulla id ante ligula. Donec accumsan dolor leo.`;
 
-const UploadPage: NextPage = () => {
+const Page: NextPage = () => {
   const [file, setFile] = useState<File | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,4 +79,4 @@ const UploadPage: NextPage = () => {
   );
 };
 
-export default UploadPage;
+export default Page;
