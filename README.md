@@ -36,3 +36,10 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+## Backend API Docs
+
+1. `POST /api/text/analyze`: Takes `{ scene }` as body and generates `{ story }`.
+2. `POST /api/text/generate`: Takes `{ story }` as body and generates `{ scene }`.
+3. `POST /api/image/analyze`: Takes blob image as body and generates `{ description }`.
+4. `POST /api/image/generate`: Takes `{ description }` as body and generates `{ imageUrl }`.
