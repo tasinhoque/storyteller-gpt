@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { describeImage } from "@/utils/openAIHandler";
-import { NextError } from "../../types";
+import { describeImage } from "@/utils/openAiHandler";
+import { OpenAiApiError } from "../../types";
 import { isRequestRejected, error } from "@/utils/safetyChecking";
 
 export const POST = async (req: NextRequest) => {
@@ -15,7 +15,7 @@ export const POST = async (req: NextRequest) => {
     }
   } catch (error) {
     return NextResponse.json(
-      { error: (error as NextError).error.message },
+      { error: (error as OpenAiApiError).error.message },
       { status: 400 }
     );
   }
