@@ -1,3 +1,3 @@
-export interface OpenAiApiError {
+export interface OpenAIApiError {
   error: Error;
 }
