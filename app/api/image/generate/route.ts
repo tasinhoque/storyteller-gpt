@@ -5,7 +5,6 @@ import { OpenAiApiError } from "../../types";
 export const POST = async (req: NextRequest) => {
   try {
     const { description } = await req.json();
-    console.log(description);
     const url = await generateImage(description);
 
     return NextResponse.json({ url });

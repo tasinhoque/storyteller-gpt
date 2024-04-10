@@ -12,6 +12,7 @@ export const ImageProvider: React.FC<React.PropsWithChildren> = ({
 
   const generateImage = async () => {
     const description = await getStoryScene();
+    console.log(description);
 
     let res = await fetch("/api/image/generate", {
       method: "POST",
