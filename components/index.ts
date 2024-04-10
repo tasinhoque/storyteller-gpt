@@ -1,8 +1,9 @@
 export { Column } from "./Column";
 export { DescriptionCard } from "./DescriptionCard";
-export { ImageUploadCard } from "./ImageUploadCard";
+export { ImageUpload } from "./ImageUpload";
 export { TextArea } from "./TextArea";
 export { GenerateButton } from "./GenerateButton";
 export { PageTitle } from "./PageTitle";
 export { ContentArea } from "./ContentArea";
-export { Card } from "./Card";
+export { GeneratedImage } from "./GeneratedImage";
+export { LoadingSpinner } from "./LoadingSpinner";

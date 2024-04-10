@@ -9,7 +9,7 @@ export const generateImage = async (prompt: string) => {
     model: "dall-e-2",
     prompt,
     n: 1,
-    size: "512x512",
+    size: "256x256",
   });
 
   return response.data[0].url ?? "";

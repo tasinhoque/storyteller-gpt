@@ -8,24 +8,26 @@ export const ImageProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [url, setUrl] = useState("");
-  const scene = useGetStoryScene();
+  const getStoryScene = useGetStoryScene();
 
-  const requestImg = async () => {
+  const generateImage = async () => {
+    const description = await getStoryScene();
+
     let res = await fetch("/api/image/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ scene }),
+      body: JSON.stringify({ description }),
     });
 
     const data = await res.json();
     setUrl(data.url);
   };
 
-  const clearImg = () => setUrl("");
+  const clearImage = () => setUrl("");
 
-  const value = { url, requestImg, clearImg };
+  const value = { url, generateImage, clearImage };
 
   return (
     <ImageContext.Provider value={value}>{children}</ImageContext.Provider>

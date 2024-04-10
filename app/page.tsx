@@ -1,22 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 import type { NextPage } from "next";
 import {
-  Card,
   Column,
   ContentArea,
   DescriptionCard,
   GenerateButton,
-  ImageUploadCard,
+  GeneratedImage,
+  ImageUpload,
+  LoadingSpinner,
   PageTitle,
   TextArea,
 } from "@/components";
+import {
+  useDescription,
+  useGenerateStory,
+  useSetDescription,
+  useStory,
+} from "@/services/message";
+import { useGenerateImage, useImageUrl } from "@/services/image";
 
-const dummyText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sagittis bibendum nibh in placerat. In nec porta erat. Donec nec fermentum tellus. Mauris quis velit et tellus efficitur ultricies. Vestibulum tincidunt, ligula commodo eleifend cursus, enim orci volutpat enim, eget gravida quam urna nec velit. Donec tellus justo, ultrices ut mi eget, fringilla congue dolor. Curabitur massa est, porta vel risus ut, convallis efficitur augue. Phasellus ut lectus sed mi auctor tincidunt quis nec risus. Pellentesque nunc lectus, laoreet vel odio eu, elementum lacinia massa. Phasellus at dui ornare, dignissim orci ac, laoreet sem. Nulla id ante ligula. Donec accumsan dolor leo.`;
+const dummyText = `A peaceful village.`;
 
 const Page: NextPage = () => {
+  const generateStory = useGenerateStory();
+  const story = useStory();
+  const description = useDescription();
+  const setDescription = useSetDescription();
+  const generateImage = useGenerateImage();
+  const url = useImageUrl();
+
   const [file, setFile] = useState<File | null>(null);
+  const [visionOutput, setVisionOutput] = useState("");
+  const [descriptionLoading, setDescriptionLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -56,23 +74,52 @@ const Page: NextPage = () => {
     }
   };
 
+  const onGenerateDescription: MouseEventHandler<
+    HTMLButtonElement
+  > = async () => {
+    setVisionOutput(dummyText);
+    setDescription(dummyText);
+  };
+
+  const onGenerateStory: MouseEventHandler<HTMLButtonElement> = async () => {
+    setDescriptionLoading(true);
+    await generateStory();
+    setDescriptionLoading(false);
+  };
+
+  const onGenerateImage: MouseEventHandler<HTMLButtonElement> = async () => {
+    setImageLoading(true);
+    await generateImage();
+    setImageLoading(false);
+  };
+
+  const onDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (
+    event
+  ) => {
+    setDescription(event.target.value);
+  };
+
   return (
     <>
       <PageTitle text="Storyteller GPT" />
       <ContentArea>
         <Column>
-          <ImageUploadCard />
-          <GenerateButton text="Description" />
-          <DescriptionCard text={dummyText} />
+          <ImageUpload />
+          <GenerateButton text="Description" onClick={onGenerateDescription} />
+          <DescriptionCard text={visionOutput} />
         </Column>
         <Column>
-          <TextArea text={dummyText} />
-          <GenerateButton text="Story" />
-          <DescriptionCard text={dummyText} />
+          <TextArea text={description} onChange={onDescriptionChange} />
+          <GenerateButton text="Story" onClick={onGenerateStory} />
+          {descriptionLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <DescriptionCard text={story} />
+          )}
         </Column>
         <Column>
-          <GenerateButton text="Image" />
-          <Card />
+          <GenerateButton text="Image" onClick={onGenerateImage} />
+          {imageLoading ? <LoadingSpinner /> : <GeneratedImage url={url} />}
         </Column>
       </ContentArea>
     </>

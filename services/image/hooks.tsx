@@ -9,14 +9,14 @@ export const useImageUrl = () => {
   return context.url;
 };
 
-export const useRequestImg = () => {
+export const useGenerateImage = () => {
   const context = useContext(ImageContext);
 
-  return context.requestImg;
+  return context.generateImage;
 };
 
-export const useClearImg = () => {
+export const useClearImage = () => {
   const context = useContext(ImageContext);
 
-  return context.clearImg;
+  return context.clearImage;
 };

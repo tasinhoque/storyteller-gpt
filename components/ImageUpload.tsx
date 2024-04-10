@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card } from "./Card";
 
-export const ImageUploadCard: React.FC = () => (
+export const ImageUpload: React.FC = () => (
   <Card>
     <label
       htmlFor="image-upload"

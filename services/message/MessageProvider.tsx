@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { MessageContext } from "./context";
 
+const SceneGenerationInstructions =
+  "Describe a scene from the story above. Be sure not to cross 1000 characters while generating the description.";
+
 export const MessageProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
@@ -30,7 +33,7 @@ export const MessageProvider: React.FC<React.PropsWithChildren> = ({
 
   const generateStory = async () => {
     try {
-      const prompt = `Based on the scene ${description}, generate a story.`;
+      const prompt = `"${description}"\nBased on the scene above, generate a story.`;
 
       let res = await fetch("/api/text/generate", {
         method: "POST",
@@ -50,7 +53,7 @@ export const MessageProvider: React.FC<React.PropsWithChildren> = ({
 
   const getStoryScene = async (): Promise<string | undefined> => {
     try {
-      const prompt = `${story}\nDescribe a scene from the story above.`;
+      const prompt = `${story}\n${SceneGenerationInstructions}`;
 
       let res = await fetch("/api/text/generate", {
         method: "POST",

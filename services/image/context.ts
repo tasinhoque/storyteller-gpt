@@ -2,14 +2,14 @@ import { createContext } from "react";
 
 interface ImageContextType {
   url: string;
-  requestImg: (_prompt: string) => Promise<void>;
-  clearImg: () => void;
+  generateImage: () => Promise<void>;
+  clearImage: () => void;
 }
 
 const defaultImageContextValue = {
   url: "",
-  requestImg: (_prompt: string) => Promise.resolve(),
-  clearImg: () => {},
+  generateImage: () => Promise.resolve(),
+  clearImage: () => {},
 };
 
 export const ImageContext = createContext<ImageContextType>(
